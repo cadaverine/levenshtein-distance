@@ -1,6 +1,25 @@
 use std::cmp;
 
 #[allow(dead_code)]
+fn get_match_cost(a: char, b: char) -> usize {
+    if a == b {
+        return 0;
+    }
+    return 1;
+}
+
+#[allow(dead_code)]
+fn get_insert_cost() -> usize {
+    return 1;
+}
+
+#[allow(dead_code)]
+fn get_delete_cost() -> usize {
+    return 1;
+}
+
+
+
 fn get_levenstein_distance(first: &str, second: &str) -> usize {
     let removeCost = 1;
     let insertCost = 1;
