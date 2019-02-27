@@ -1,6 +1,5 @@
 use std::cmp;
 
-
 fn get_match_cost(a: char, b: char) -> usize {
     if a == b {
         return 0;
@@ -8,16 +7,13 @@ fn get_match_cost(a: char, b: char) -> usize {
     return 1;
 }
 
-
 fn get_insert_cost() -> usize {
     return 1;
 }
 
-
 fn get_delete_cost() -> usize {
     return 1;
 }
-
 
 fn get_levenstein_distance(first: &str, second: &str) -> usize {
     let first_length = first.len();
@@ -46,17 +42,18 @@ fn get_levenstein_distance(first: &str, second: &str) -> usize {
 
                 let delete_distance = top_cell + delete_cost;
                 let insert_distance = left_cell + insert_cost;
-                let match_distance = top_left_cell + get_match_cost(first_vec[j - 1], second_vec[i - 1]);
+                let match_distance =
+                    top_left_cell + get_match_cost(first_vec[j - 1], second_vec[i - 1]);
 
                 *item = vec![match_distance, delete_distance, insert_distance]
-                    .iter().fold(0, |min, element| cmp::min(min, *element));
+                    .iter()
+                    .fold(0, |min, element| cmp::min(min, *element));
             }
         }
     }
 
     matrix[first_length - 1][second_length - 1]
 }
-
 
 fn main() {
     let first_string = "toggle";
