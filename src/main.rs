@@ -27,17 +27,17 @@ fn get_levenstein_distance(first: &str, second: &str) -> usize {
     let insert_cost = get_insert_cost();
     let delete_cost = get_delete_cost();
 
-    for (i, row) in matrix.iter_mut().enumerate() {
-        for (j, item) in row.iter_mut().enumerate() {
+    for i in 0..first_length + 1 {
+        for j in 0..second_length + 1 {
             // заполняем первую строку индексами от 0 до 'first_length'
             if i == 0 {
-                *item = j;
+                matrix[i][j] = j;
             // заполняем первый столбец индексами от 0 до 'second_length'
             } else if j == 0 {
-                *item = i;
+                matrix[i][j] = i;
             } else {
                 let top_cell = matrix[i - 1][j];
-                let left_cell = row[j - 1];
+                let left_cell = matrix[i][j - 1];
                 let top_left_cell = matrix[i - 1][j - 1];
 
                 let delete_distance = top_cell + delete_cost;
@@ -45,9 +45,9 @@ fn get_levenstein_distance(first: &str, second: &str) -> usize {
                 let match_distance =
                     top_left_cell + get_match_cost(first_vec[j - 1], second_vec[i - 1]);
 
-                *item = vec![match_distance, delete_distance, insert_distance]
+                matrix[i][j] = vec![match_distance, delete_distance, insert_distance]
                     .iter()
-                    .fold(0, |min, element| cmp::min(min, *element));
+                    .fold(match_distance, |min, element| cmp::min(min, *element));
             }
         }
     }
