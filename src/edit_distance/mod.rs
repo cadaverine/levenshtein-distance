@@ -59,3 +59,6 @@ pub fn get_levenshtein_distance(first: &str, second: &str) -> usize {
 
     matrix[column_length][row_length]
 }
+
+#[cfg(test)]
+mod tests;
