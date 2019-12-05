@@ -27,7 +27,7 @@ pub fn get_levenshtein_distance(first: &str, second: &str) -> usize {
     let insert_cost = get_insert_cost();
     let delete_cost = get_delete_cost();
 
-    println!("Матрица расстояний:");
+    println!("\nМатрица расстояний:");
 
     for i in 0..=column_length {
         for j in 0..=row_length {
@@ -54,7 +54,10 @@ pub fn get_levenshtein_distance(first: &str, second: &str) -> usize {
             }
         }
 
-        println!("{:?}", matrix[i]);
+        for k in 0..=row_length {
+            print!("{:4}", matrix[i][k]);
+        }
+        println!()
     }
 
     matrix[column_length][row_length]

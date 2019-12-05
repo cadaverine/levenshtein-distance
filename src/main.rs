@@ -8,14 +8,14 @@ fn main() {
         let mut first_string = String::new();
         let mut second_string = String::new();
 
-        println!("Введите первую строку:");
+        println!("\nВведите первую строку:");
         let _ = io::stdin().read_line(&mut first_string);
-        
-        println!("Введите вторую строку:");
+
+        println!("\nВведите вторую строку:");
         let _ = io::stdin().read_line(&mut second_string);
 
         println!(
-            "{:?}",
+            "\nРасстояние Левенштейна: {:?}\n",
             get_levenshtein_distance(&first_string, &second_string)
         );
     }
