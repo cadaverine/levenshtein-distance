@@ -22,15 +22,15 @@ pub fn get_levenshtein_distance(first: &str, second: &str) -> usize {
     let first_vec: Vec<char> = first.chars().collect();
     let second_vec: Vec<char> = second.chars().collect();
 
-    let mut matrix: Vec<Vec<usize>> = vec![vec![0; row_length + 1]; column_length + 1];
+    let mut matrix: Vec<Vec<usize>> = vec![vec![0; row_length]; column_length];
 
     let insert_cost = get_insert_cost();
     let delete_cost = get_delete_cost();
 
     println!("\nМатрица расстояний:");
 
-    for i in 0..=column_length {
-        for j in 0..=row_length {
+    for i in 0..column_length {
+        for j in 0..row_length {
             // заполняем первую строку индексами от 0 до 'first_length'
             if i == 0 {
                 matrix[i][j] = j;
@@ -54,13 +54,13 @@ pub fn get_levenshtein_distance(first: &str, second: &str) -> usize {
             }
         }
 
-        for k in 0..=row_length {
+        for k in 0..row_length {
             print!("{:4}", matrix[i][k]);
         }
         println!()
     }
 
-    matrix[column_length][row_length]
+    matrix[column_length-1][row_length-1]
 }
 
 #[cfg(test)]
